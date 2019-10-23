@@ -1,0 +1,86 @@
+<div class="jumbotron">
+    <div class="d-flex justify-content-center">
+        <img src="{{ photosUrl }}">
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h3><strong>Hours</strong></h3>
+        <div *ngFor="let day of days">
+            <p><strong>{{ day.day }}:</strong> {{ day.hours }}</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="col">
+            <div class="row">
+                <h1><strong> {{ place.name }}</strong></h1>
+            </div>
+            <div class="row">
+                <div class="col-">
+                    <h5><strong> {{ ratingStr }}</strong></h5>
+                </div>
+                <div class="col-sm">
+                    <p> {{ place.user_ratings_total }} reviews</p>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-">
+                    <div *ngIf="place.price_level == 1">
+                        <p>$</p>
+                    </div>
+                    <div *ngIf="place.price_level == 2">
+                        <p>$$</p>
+                    </div>
+                    <div *ngIf="place.price_level == 3">
+                        <p>$$$</p>
+                    </div>
+                    <div *ngIf="place.price_level == 4">
+                        <p>$$$$</p>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <p>{{ place.types[0] }}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <h4><strong>Reviews</strong></h4>
+            </div>
+            <div class="row">
+                <div class="col-">
+                    <img src="{{ place.reviews[0].profile_photo_url }}">
+                </div>
+                <div class="col-sm">
+                    <p>{{ place.reviews[0].text }}</p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-">
+                    <img src="{{ place.reviews[1].profile_photo_url }}">
+                </div>
+                <div class="col-sm">
+                    <p>{{ place.reviews[1].text }}</p>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-">
+                    <img src="{{ place.reviews[2].profile_photo_url }}">
+                </div>
+                <div class="col-sm">
+                    <p>{{ place.reviews[2].text }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col float-right">
+        <h3><strong>Contact</strong></h3>
+        <ul class="list-group">
+            <li class="list-group-item w-auto">{{ place.website }}</li>
+            <li class="list-group-item w-auto">{{ place.formatted_phone_number }}</li>
+            <li class="list-group-item w-auto">{{ place.formatted_address }}</li>
+        </ul>
+    </div>
+</div>
+

@@ -1,0 +1,37 @@
+<div class="jumbotron">
+  <h1 class="display-4">Find A Restaurant!</h1>
+  <p class="lead">Enter any location you would like to find a restaurant near.</p>
+  <hr class="my-4">
+  <div class="input-group">
+    <input type="text" class="form-control" placeholder="McDonalds, Burger King, Chiles..." name="query" #query>
+    <input type="text" class="form-control" placeholder="Albany, NY.." name="location" #location>
+    <div class="input-group-append">
+      <button class="btn btn-primary btn-lg" (click)="performSearch(query, location)">Search!</button>    
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div *ngIf="places; else elseblock1">
+    <ul class="list-group list-group-flush">
+      <div *ngFor="let place of places">
+        <li class="list-group-item">
+          <a [title]="place.name + ' details'" [routerLink]="['/places', place.place_id]" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1 text-primary">{{ place.name }}</h5>
+              <div *ngIf=place.opening_hours>
+                <div *ngIf="place.opening_hours.open_now; else elseblock" class="text-success"><small>Open</small></div>
+                <ng-template class="text-danger" #elseBlock ><small>Closed</small></ng-template>
+              </div>
+            </div>
+            <p class="mb-1">{{ place.formatted_address }}</p>
+          </a>
+        </li>
+        <br>
+      </div>
+    </ul>
+  </div>
+  <ng-template class="text-danger" #elseBlock1 >No Results Found</ng-template>
+</div>
+
+

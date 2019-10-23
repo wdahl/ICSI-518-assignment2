@@ -1,14 +1,3 @@
-<h1>
-  {{title}}
-</h1>
+<app-nav-bar></app-nav-bar>
 
-<input name="location" #location>
-
-<button (click)="performSearch(location)">Search</button>
-<br>
-
-<div *ngfor="let place of places">
-  <p>{{place.name}}</p>
-  <img src="{{place.photos[0].html_attributions[0].substring(14)}}" height="2268" width="4032">
-  <p>{{place.rating}}</p>
-</div>
+<router-outlet></router-outlet>
