@@ -2,36 +2,35 @@
   <h1 class="display-4">Find A Restaurant!</h1>
   <p class="lead">Enter any location you would like to find a restaurant near.</p>
   <hr class="my-4">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="McDonalds, Burger King, Chiles..." name="query" #query>
-    <input type="text" class="form-control" placeholder="Albany, NY.." name="location" #location>
+  <form class="input-group" method="post" #myform="ngForm" (ngSubmit)="performSearch()">
+    <input type="text" class="form-control" id="query" required name="query" [(ngModel)]="query" placeholder="McDonalds, Burger King, Chiles...">
+    <input type="text" class="form-control" id="location" required name="location" [(ngModel)]="location" placeholder="Albany, NY..">
     <div class="input-group-append">
-      <button class="btn btn-primary btn-lg" (click)="performSearch(query, location)">Search!</button>    
+      <input class="btn btn-primary btn-lg" type="submit" value="Search!">
     </div>
-  </div>
+    {{diagnostic}}
+  </form>
 </div>
 
 <div class="container">
-  <div *ngIf="places; else elseblock1">
-    <ul class="list-group list-group-flush">
-      <div *ngFor="let place of places">
-        <li class="list-group-item">
-          <a [title]="place.name + ' details'" [routerLink]="['/places', place.place_id]" class="list-group-item list-group-item-action flex-column align-items-start">
-            <div class="d-flex w-100 justify-content-between">
-              <h5 class="mb-1 text-primary">{{ place.name }}</h5>
-              <div *ngIf=place.opening_hours>
-                <div *ngIf="place.opening_hours.open_now; else elseblock" class="text-success"><small>Open</small></div>
-                <ng-template class="text-danger" #elseBlock ><small>Closed</small></ng-template>
-              </div>
+    <div *ngIf="places; else elseblock1">
+        <ul class="list-group list-group-flush">
+            <div *ngFor="let place of places">
+                <li class="list-group-item">
+                    <a [title]="place.name + ' details'" [routerLink]="['/places', place.place_id]" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h5 class="mb-1 text-primary">{{ place.name }}</h5>
+                            <div *ngIf=place.opening_hours>
+                                <div *ngIf="place.opening_hours.open_now; else elseblock" class="text-success"><small>Open</small></div>
+                                <ng-template class="text-danger" #elseBlock ><small>Closed</small></ng-template>
+                            </div>
+                        </div>
+                        <p class="mb-1">{{ place.formatted_address }}</p>
+                    </a>
+                </li>
+                <br>
             </div>
-            <p class="mb-1">{{ place.formatted_address }}</p>
-          </a>
-        </li>
-        <br>
-      </div>
-    </ul>
-  </div>
-  <ng-template class="text-danger" #elseBlock1 >No Results Found</ng-template>
+        </ul>
+    </div>
+    <ng-template class="text-danger" #elseBlock1 ><small>No Results Found!</small></ng-template>
 </div>
-
-

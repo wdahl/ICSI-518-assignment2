@@ -11,9 +11,11 @@ export class SearchComponent implements OnInit {
   title = 'Find Restaurants';
   type = '&type=restaurant';
   key = '&key=AIzaSyDWC7KV-XxyHpDWGIzpV4BjM5iyr2bNM-A';
-  placesLink = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=';
+  placesLink;
   fields = '&fields=name,rating,photos,place_id';
   query;
+  location;
+  fullQuery;
   places = [];
 
   constructor(private http: HttpClient) { }
@@ -21,14 +23,14 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  performSearch(query, location): void {
-   this.query = query.value + '+' + location.value;
-   this.query = this.query.replace(' ', '+');
-   this.query = this.query.replace(', ', '+');
-   this.placesLink = this.placesLink + this.query + this.fields + this.type + this.key;
-   this.http.get(this.placesLink).subscribe((data: JSON) => {
+  performSearch() {
+    this.placesLink = 'https://maps.googleapis.com/maps/api/place/textsearch/json?query=';
+    this.fullQuery = this.query + '+' + this.location;
+    this.fullQuery = this.fullQuery.replace(' ', '+');
+    this.fullQuery = this.fullQuery.replace(', ', '+');
+    this.placesLink = this.placesLink + this.fullQuery + this.fields + this.type + this.key;
+    this.http.get('https://cors-anywhere.herokuapp.com/' + this.placesLink).subscribe((data: JSON) => {
       this.places = data['results'];
-      console.log(this.places);
    });
   }
 }
