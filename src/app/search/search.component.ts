@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class SearchComponent implements OnInit {
   title = 'Find Restaurants';
   type = '&type=restaurant';
-  key = '&key=AIzaSyDWC7KV-XxyHpDWGIzpV4BjM5iyr2bNM-A1';
+  key = '&key=YourKey';
   placesLink;
   fields = '&fields=name,rating,photos,place_id';
   query;
