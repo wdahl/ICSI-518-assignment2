@@ -11,7 +11,7 @@ export class PlaceDetailsComponent implements OnInit {
   detailsUrl = 'https://maps.googleapis.com/maps/api/place/details/json?place_id=';
   placeId;
   fields = '&fields=formatted_address,name,formatted_phone_number,opening_hours,website,price_level,rating,reviews,user_ratings_total,photos,type';
-  key = '&key=AIzaSyDWC7KV-XxyHpDWGIzpV4BjM5iyr2bNM-A1';
+  key = '&key=YourKey';
   photosUrl = 'https://maps.googleapis.com/maps/api/place/photo?maxwidth=10000&photoreference=';
   placeJSON;
   place;
